@@ -1,0 +1,4 @@
+#!/bin/bash
+
+reply=$(/usr/bin/proxychains -q python /home/pokersu/proj/ai/openai/chat.py "$1")
+echo -e "ChatGPT:\n\n$reply\n"

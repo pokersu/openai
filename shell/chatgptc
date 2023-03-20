@@ -1,0 +1,4 @@
+#!/bin/bash
+
+reply=$(/usr/bin/proxychains -q python /home/pokersu/proj/ai/openai/qa.py "$1,只输出代码不输出其他内容")
+echo "$reply"
