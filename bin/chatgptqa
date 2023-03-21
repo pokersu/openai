@@ -1,9 +1,0 @@
-#!/bin/bash
-
-context=$1
-question=$2
-
-prompt="Answer the question use chinese based on the following context:\n\ncontext:$context\n\nQ:$question\n\nA:"
-
-reply=$(/usr/bin/proxychains -q python /home/pokersu/proj/ai/openai/qa.py "$prompt")
-echo -e "ChatGPT:\n\n$reply\n"

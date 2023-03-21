@@ -1,11 +1,8 @@
 import openai
 import backoff
 import pickle
-import sys
 import os
 import time
-
-openai.api_key=''
 
 
 class ChatGPT:

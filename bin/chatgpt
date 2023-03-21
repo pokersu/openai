@@ -1,4 +1,79 @@
 #!/bin/bash
 
-reply=$(/usr/bin/proxychains -q python /home/pokersu/proj/ai/openai/chat.py "$1")
-echo -e "ChatGPT:\n\n$reply\n"
+VERSION=1.0
+WORKDIR=$OPENAI_WORKDIR
+PROXY_CHAINS_EXE=/usr/bin/proxychains
+source $WORKDIR/env/bin/activate
+cd /tmp
+
+
+brief=0
+no_memory=0
+
+
+help(){
+    cat<<__END
+CommandLine Tool v1.0
+
+Usage:
+    -b      use brief mode, has memory
+    -c      use pure mode, has memory
+    -q      use qa mode, no memory
+    -h      help info
+    -v      show tool version
+    
+__END
+}
+
+chat(){
+    reply=$($PROXY_CHAINS_EXE -q python $WORKDIR/chat.py "$prompt")
+    if [[ $1 == "brief" ]]; then
+        reply=$($PROXY_CHAINS_EXE -q python $WORKDIR/chat.py "$prompt")
+        echo -e "$reply"
+    else
+        echo -e "ChatGPT:\n\n$reply\n"
+    fi
+}
+
+qa(){
+    echo -e "ChatGPT: \n\n$($PROXY_CHAINS_EXE -q python $WORKDIR/qa.py \""$prompt"\")\n"
+}
+
+
+
+if [[ $# == 2 ]]; then
+    if [[ $2 == '-b' || $2 == '-c' || $2 == '-qa' || $2 == '-h' || $2 == '-v' ]]; then
+        echo -e "arguments error"
+        exit 1
+    fi
+elif [[ $# == 1 ]]; then
+    if [[ $1 == '-b' || $1 == '-c' || $1 == '-qa' || $1 == '-h' || $1 == '-v' ]]; then
+        echo -e "arguments error"
+        exit 1
+    else
+        prompt=$1 && chat
+    fi
+elif [[ $# == 0 ]]; then
+    echo "no input found"
+fi
+
+
+while getopts ":b:c:q:h:v" optname; do
+    case "$optname" in
+        b) prompt=$2 && chat "brief";; # use brief mode, but has memory
+        c) 
+            prompt="$2, Only output the code, nothing else!!"
+            chat "brief";; # use pure mode
+        q) 
+            context=$2
+            question=$3
+            prompt="Answer the question use chinese based on the following context:\n\ncontext:$context\n\nQ:$question\n\nA:"
+            qa
+        ;; # use qa mode, no histories, no memory
+        h | ?) help ;;
+        v) echo -e "ChatGPT ComandLine Tool v1.0" ;;
+        :) echo "default" ;;
+    esac
+done
+
+

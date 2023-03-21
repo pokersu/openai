@@ -1,4 +1,0 @@
-#!/bin/bash
-
-reply=$(/usr/bin/proxychains -q python /home/pokersu/proj/ai/openai/qa.py "$1")
-echo -e "$reply"
