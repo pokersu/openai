@@ -1,5 +1,12 @@
 # chatgpt command line tool
 
+a chatgpt tool based on command tool. It can avoid the need to frequently switch agents in use. 
+and you can based on this tool build other application, just need call this shell script and handle the result in your application.
+
+and even you can use it in you iphone shortcut command, in your shortcut command app call your server ssh. and use shortcut command by siri
+
+
+or you can use it do anything in linux shell, maybe you can use it extract somen keyword from a text and pipe it to another ai application, such as stable diffusion to generate a image
 
 ### requirement
 
