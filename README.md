@@ -70,3 +70,4 @@ chatgpt -q context question
 - brief chat you can use it in vim or other editor, when you ask gpt generate some code. the result will more clearly
 - chat mode will has some memory for history, 15 times chat and less than 20min, if over this limit, the memory will loss
 - qa mode need you prepare input context and the question for this context , and important : no memory 
+- default use chatgpt 3.5 turbo model, if you want change that , please change it in chatgpt.py
