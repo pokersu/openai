@@ -5,7 +5,7 @@
 
 1. install proxychains 
 
-*you need prepare a proxy that(openai usable, non hk, china)* 
+*you need prepare a proxy that openai usable. (non hk, china)* 
 
 proxychains config:
 
